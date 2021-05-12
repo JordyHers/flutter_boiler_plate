@@ -4,6 +4,7 @@ part of 'boiler_plate_bloc.dart';
 abstract class BoilerPlateState {}
 
 class BoilerPlateInitial extends BoilerPlateState {}
+
 class BoilerPlateFetching extends BoilerPlateState{}
 
 class BoilerPlateCompleted extends BoilerPlateState{

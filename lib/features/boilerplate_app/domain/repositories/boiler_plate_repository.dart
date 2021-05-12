@@ -1,6 +1,5 @@
 import 'package:boilerplate/features/boilerplate_app/data/datasource/boilerplate_local_json.dart';
 import 'package:boilerplate/features/boilerplate_app/data/models/user_model.dart';
-import 'package:flutter/foundation.dart';
 import  'dart:async';
 
 abstract class  BoilerPlateRepository {

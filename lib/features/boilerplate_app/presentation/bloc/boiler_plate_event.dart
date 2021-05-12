@@ -6,3 +6,5 @@ abstract class BoilerPlateEvent {
 }
 
 class GetLocalUsers extends BoilerPlateEvent{}
+
+class GetRemoteUsers extends BoilerPlateEvent{}
