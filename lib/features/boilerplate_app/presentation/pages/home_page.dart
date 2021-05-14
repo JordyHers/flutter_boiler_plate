@@ -15,11 +15,17 @@ class HomePage extends StatelessWidget {
     Navigator.pop(context);
   }
 
-
   ///Methods To send to Bloc => Remote User
   void sendRemoteToBloC(BuildContext context) {
     var boilerPlateBloc = context.read<BoilerPlateBloc>();
     boilerPlateBloc.add(GetRemoteUsers());
+    Navigator.pop(context);
+  }
+
+  ///Methods To send ERROR to Bloc
+  void sendErrorToBloC(BuildContext context) {
+    var boilerPlateBloc = context.read<BoilerPlateBloc>();
+    boilerPlateBloc.add(GetError());
     Navigator.pop(context);
   }
 
@@ -82,7 +88,13 @@ class HomePage extends StatelessWidget {
             leading: Icon(Icons.computer),
             title: Text('Get RemoteUsers'),
             onTap: () async => await sendRemoteToBloC(context),
-          )
+          ),
+          SizedBox(height: 10,),
+          ListTile(
+            leading: Icon(Icons.error_outline),
+            title: Text('Send Error'),
+            onTap: () async => await sendErrorToBloC(context),
+          ),
         ],
       ));
   }
@@ -91,7 +103,7 @@ class HomePage extends StatelessWidget {
     return Center(
       child: Text(
         'Home Page',
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 23),
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25, color: Colors.indigo),
       ),
     );
   }
@@ -119,5 +131,6 @@ class HomePage extends StatelessWidget {
         });
   }
 }
+
 
 

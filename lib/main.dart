@@ -2,7 +2,7 @@ import 'package:boilerplate/features/boilerplate_app/domain/repositories/boiler_
 import 'package:boilerplate/features/boilerplate_app/presentation/bloc/boiler_plate_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'features/boilerplate_app/presentation/pages/home_page.dart';
+import 'features/boilerplate_app/presentation/pages/tab_bar_items_page.dart';
 
 
 void main() {
@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.indigo,
-        accentColor: Colors.indigoAccent,
+        accentColor: Colors.indigo,
       ),
       home: BlocProvider(
         create: (context) => BoilerPlateBloc(BoilerPlateRep()),
-        child: HomePage(),
+        child: TabBarItemPage(),
       ),
     );
   }

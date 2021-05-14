@@ -24,7 +24,7 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
         yield BoilerPlateError("Couldn't fetch weather. Is the device online?");
       }
     }
-    else{
+    else if (event is GetRemoteUsers){
       try {
         yield BoilerPlateFetching();
         final users = await boilerPlateRepository.getRemoteList('1234');
@@ -32,7 +32,8 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
       } on Exception {
         yield BoilerPlateError("Couldn't fetch weather. Is the device online?");
       }
-
+    } else {
+      yield BoilerPlateError("Couldn't fetch weather. Is the device online?");
     }
   }
 }
