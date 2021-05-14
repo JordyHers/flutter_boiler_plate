@@ -32,7 +32,7 @@ class _TabBarItemPageState extends State<TabBarItemPage> {
   void _selectTab(TabItem tabItem) {
     if (tabItem == _currentTab) {
       //pop to first root
-      /// This section allows the user to get back to the root when he oresses the
+      /// This section allows the user to get back to the root when he presses the
       /// icon on the bottomNavigation bar
       navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
     } else {
