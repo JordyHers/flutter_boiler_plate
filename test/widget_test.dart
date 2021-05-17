@@ -26,17 +26,21 @@ Future<void> pumpHomePage(WidgetTester tester) async {
 }
 
 void main() async {
-  testWidgets('Test to display Home Page', (WidgetTester tester) async {
-    await pumpHomePage(tester);
-    expect(find.text('Home Page'), findsOneWidget);
 
 
-  });
-
-  testWidgets('CHECK IF THE PAGE IS EMPTY', (WidgetTester tester) async {
-    await pumpHomePage(tester);
-    expect(find.text('Home Page'), findsOneWidget);
+    testWidgets('Test to display Home Page', (WidgetTester tester) async {
+      await pumpHomePage(tester);
+      expect(find.text('Home Page'), findsOneWidget);
 
 
-  });
+    });
+
+    testWidgets('If scaffold appears', (WidgetTester tester) async {
+      await pumpHomePage(tester);
+      var scaffoldKey = Key('Scaffold_key');
+      expect(find.byKey(scaffoldKey),findsOneWidget);
+
+    });
+
+
 }

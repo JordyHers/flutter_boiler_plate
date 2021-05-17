@@ -32,6 +32,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Key('Scaffold_key'),
         drawer: buildDrawer(context),
         backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
@@ -68,6 +69,7 @@ class HomePage extends StatelessWidget {
 
   Drawer buildDrawer(BuildContext context) {
     return Drawer(
+      key: Key('Drawer_key'),
           child: ListView(
         children: [
           DrawerHeader(
