@@ -21,7 +21,7 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
         final users = await boilerPlateRepository.getLocalList('1234');
         yield BoilerPlateCompleted(users);
       } on Exception {
-        yield BoilerPlateError("Couldn't fetch weather. Is the device online?");
+        yield BoilerPlateError("Couldn't fetch user list. Is the device online?");
       }
     }
     else if (event is GetRemoteUsers){

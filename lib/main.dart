@@ -16,8 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Colors.indigo,
-        accentColor: Colors.indigo,
+        primarySwatch: Colors.indigo,
       ),
       home: BlocProvider(
         create: (context) => BoilerPlateBloc(BoilerPlateRep()),
