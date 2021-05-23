@@ -1,7 +1,8 @@
+import 'package:boilerplate/features/boilerplate_app/domain/entities/model_provider.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/widgets/cupertino_home_scaffold.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/widgets/tab_item.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import 'account_page.dart';
 import 'home_page.dart';
 import 'menu_page.dart';
@@ -46,14 +47,17 @@ class _TabBarItemPageState extends State<TabBarItemPage> {
   Widget build(BuildContext context) {
     /// WillpopScope allow us to control the back button and hinders the users to exit the app when he
     /// just wants to get to the previous page
-    return WillPopScope(
-      onWillPop: () async =>
-      !await navigatorKeys[_currentTab].currentState.maybePop(),
-      child: CupertinoHomeScaffold(
-        currentTab: _currentTab,
-        onSelectTab: _selectTab,
-        widgetBuilders: widgetBuilders,
-        navigatorKeys: navigatorKeys,
+    return Provider<UserClass>(
+      create:(context) => UserClass(),
+      child: WillPopScope(
+        onWillPop: () async =>
+        !await navigatorKeys[_currentTab].currentState.maybePop(),
+        child: CupertinoHomeScaffold(
+          currentTab: _currentTab,
+          onSelectTab: _selectTab,
+          widgetBuilders: widgetBuilders,
+          navigatorKeys: navigatorKeys,
+        ),
       ),
     );
   }

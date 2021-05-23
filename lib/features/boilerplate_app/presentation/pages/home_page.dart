@@ -1,7 +1,9 @@
 import 'package:boilerplate/features/boilerplate_app/data/models/user_model.dart';
+import 'package:boilerplate/features/boilerplate_app/domain/entities/model_provider.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/bloc/boiler_plate_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
@@ -53,13 +55,13 @@ class HomePage extends StatelessWidget {
               },
               builder: (context, state) {
                 if (state is BoilerPlateInitial) {
-                  return buildInitialInput();
+                  return buildInitialInput(context);
                 } else if (state is BoilerPlateFetching) {
                   return buildLoading();
                 } else if (state is BoilerPlateCompleted) {
                   return buildListViewData(state.users);
                 } else {
-                  return buildInitialInput();
+                  return buildInitialInput(context);
                 }
               },
             ),
@@ -97,16 +99,29 @@ class HomePage extends StatelessWidget {
             title: Text('Send Error'),
             onTap: () async => await sendErrorToBloC(context),
           ),
+
         ],
       ));
   }
 
-  Widget buildInitialInput() {
+  Widget buildInitialInput(BuildContext context) {
+    final userList = Provider.of<UserClass>(context,listen: false);
     return Center(
-      child: Text(
-        'Home Page',
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25, color: Colors.indigo),
-      ),
+      child: Consumer<UserClass>(
+
+        child: ListView.builder(
+            itemCount: userList.userList.length,
+            itemBuilder: (context,index){
+             if (userList.userList.length != null && userList.userList.length != 0) {
+               return ListTile(
+                 title: Text(userList.userList[index].name),
+               );
+             } else {
+               return Center(child:CircularProgressIndicator());
+             }
+      }, )
+      )
+
     );
   }
 
