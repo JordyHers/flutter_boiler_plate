@@ -47,7 +47,7 @@ class _TabBarItemPageState extends State<TabBarItemPage> {
   Widget build(BuildContext context) {
     /// WillpopScope allow us to control the back button and hinders the users to exit the app when he
     /// just wants to get to the previous page
-    return Provider<UserClass>(
+    return ChangeNotifierProvider<UserClass>(
       create:(context) => UserClass(),
       child: WillPopScope(
         onWillPop: () async =>

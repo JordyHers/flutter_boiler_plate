@@ -4,7 +4,7 @@ class UserClass with ChangeNotifier{
   final String name;
   final String email;
   final int age;
-  List<UserClass> _userClassList;
+  List<UserClass> _userClassList =[];
 
   List<UserClass> get userList=> _userClassList;
   UserClass({this.name, this.email, this.age});

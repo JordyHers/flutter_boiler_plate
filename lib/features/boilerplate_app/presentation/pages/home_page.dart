@@ -8,8 +8,6 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
 
-
-
   ///Methods To send to Bloc => Local User
   void sendLocalToBloC(BuildContext context) {
     var boilerPlateBloc = context.read<BoilerPlateBloc>();
@@ -34,7 +32,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: Key('Scaffold_key'),
+        key: Key('Scaffold_key'),
         drawer: buildDrawer(context),
         backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
@@ -71,58 +69,65 @@ class HomePage extends StatelessWidget {
 
   Drawer buildDrawer(BuildContext context) {
     return Drawer(
-      key: Key('Drawer_key'),
-          child: ListView(
-        children: [
-          DrawerHeader(
-            child: Container(
-              color: Colors.indigo,
-              height: 130,
-              width: double.maxFinite,
+        key: Key('Drawer_key'),
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Container(
+                color: Colors.indigo,
+                height: 130,
+                width: double.maxFinite,
+              ),
             ),
-          ),
-          SizedBox(height: 10,),
-          ListTile(
-            title: Text('Get Local Users'),
-            leading: Icon(Icons.local_fire_department_sharp),
-            onTap: () async => await sendLocalToBloC(context),
-          ),
-          SizedBox(height: 10,),
-          ListTile(
-            leading: Icon(Icons.computer),
-            title: Text('Get RemoteUsers'),
-            onTap: () async => await sendRemoteToBloC(context),
-          ),
-          SizedBox(height: 10,),
-          ListTile(
-            leading: Icon(Icons.error_outline),
-            title: Text('Send Error'),
-            onTap: () async => await sendErrorToBloC(context),
-          ),
-
-        ],
-      ));
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              title: Text('Get Local Users'),
+              leading: Icon(Icons.local_fire_department_sharp),
+              onTap: () async => await sendLocalToBloC(context),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              leading: Icon(Icons.computer),
+              title: Text('Get RemoteUsers'),
+              onTap: () async => await sendRemoteToBloC(context),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              leading: Icon(Icons.error_outline),
+              title: Text('Send Error'),
+              onTap: () async => await sendErrorToBloC(context),
+            ),
+          ],
+        ));
   }
 
   Widget buildInitialInput(BuildContext context) {
-    final userList = Provider.of<UserClass>(context,listen: false);
-    return Center(
-      child: Consumer<UserClass>(
-
-        child: ListView.builder(
-            itemCount: userList.userList.length,
-            itemBuilder: (context,index){
-             if (userList.userList.length != null && userList.userList.length != 0) {
-               return ListTile(
-                 title: Text(userList.userList[index].name),
-               );
-             } else {
-               return Center(child:CircularProgressIndicator());
-             }
-      }, )
-      )
-
-    );
+    final userList = Provider.of<UserClass>(context, listen: false);
+    if (userList.userList.length != null && userList.userList.length != 0) {
+      return Center(
+          child: Consumer<UserClass>(
+              child: ListView.builder(
+        itemCount: userList.userList.length,
+        itemBuilder: (context, index) {
+          if (userList.userList.length != null &&
+              userList.userList.length != 0) {
+            return ListTile(
+              title: Text(userList.userList[index].name),
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      )));
+    } else {
+      return Center(child: CircularProgressIndicator());
+    }
   }
 
   Widget buildLoading() {
@@ -148,6 +153,3 @@ class HomePage extends StatelessWidget {
         });
   }
 }
-
-
-
