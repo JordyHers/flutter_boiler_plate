@@ -102,6 +102,14 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.error_outline),
               title: Text('Send Error'),
               onTap: () async => await sendErrorToBloC(context),
+            ), SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              leading: Icon(Icons.compass_calibration_sharp),
+              title: Text('Notifier Provider'),
+              //TODO: CREATE SENDPROVIDER AND YIELD TO REBUILD
+              //onTap: () async => await sendErrorToBloC(context),
             ),
           ],
         ));
@@ -126,7 +134,12 @@ class HomePage extends StatelessWidget {
         },
       )));
     } else {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: Text('Home Page',
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.indigo,
+          )));
     }
   }
 
