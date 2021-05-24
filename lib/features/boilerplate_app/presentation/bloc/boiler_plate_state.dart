@@ -7,6 +7,8 @@ class BoilerPlateInitial extends BoilerPlateState {}
 
 class BoilerPlateFetching extends BoilerPlateState{}
 
+class BoilerPlateProvider extends BoilerPlateState{}
+
 class BoilerPlateCompleted extends BoilerPlateState{
   final List<User> users;
     BoilerPlateCompleted(this.users);

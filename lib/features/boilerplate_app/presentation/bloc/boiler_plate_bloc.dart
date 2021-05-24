@@ -15,8 +15,6 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
 
   BoilerPlateBloc(this.boilerPlateRepository,this.context) : super(BoilerPlateInitial());
 
-
-
   @override
   Stream<BoilerPlateState> mapEventToState(
     BoilerPlateEvent event,
@@ -39,11 +37,11 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
         yield BoilerPlateError("Couldn't fetch user list. Is the device online?");
       }
     } else if(event is GetProvider){
-      final userList= Provider.of<UserClass>(context, listen: false);
+
       try {
         yield BoilerPlateFetching();
-        var user = UserClass(name: 'Jordy Hershel', email: 'From UserClass',age: 25);
-        userList.userList.add(user);
+        await boilerPlateRepository.getNotifierProvider(context);
+        yield BoilerPlateProvider();
       }
       on Exception {
         yield BoilerPlateError("Couldn't fetch user list. Is the device online?");

@@ -65,6 +65,8 @@ class HomePage extends StatelessWidget {
                   return buildLoading();
                 } else if (state is BoilerPlateCompleted) {
                   return buildListViewData(state.users);
+                }else if (state is BoilerPlateProvider) {
+                  return buildProviderView(context);
                 } else {
                   return buildInitialInput(context);
                 }
@@ -123,31 +125,28 @@ class HomePage extends StatelessWidget {
   }
 
   Widget buildInitialInput(BuildContext context) {
-    final userList = Provider.of<UserClass>(context, listen: false);
-    if (userList.userList.length != null && userList.userList.length != 0) {
-      return Center(
-          child: Consumer<UserClass>(
-              child: ListView.builder(
-        itemCount: userList.userList.length,
-        itemBuilder: (context, index) {
-          if (userList.userList.length != null &&
-              userList.userList.length != 0) {
-            return ListTile(
-              title: Text(userList.userList[index].name),
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      )));
-    } else {
       return Center(child: Text('Home Page',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
             color: Colors.indigo,
           )));
-    }
+
+  }
+
+  Widget buildProviderView(BuildContext context){
+    final userList = Provider.of<UserClass>(context,listen: false);
+    return Center(
+          child: Consumer<UserClass>(
+              child: ListView.builder(
+                itemCount: userList.userList.length,
+                itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(userList.userList[index].name),
+                    );
+                  }
+
+              )));
   }
 
   Widget buildLoading() {
