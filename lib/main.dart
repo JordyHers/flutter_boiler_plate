@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       ),
       home: Provider<UserClass>(
         create: (_) => UserClass(),
-        builder: (context,__) => BlocProvider(
-          create: (_) => BoilerPlateBloc(BoilerPlateRep(context), context),
+        builder: (context,user) => BlocProvider(
+          create: (_) => BoilerPlateBloc(BoilerPlateRep(UserClass()), context),
           child: TabBarItemPage(),
         ),
       ),

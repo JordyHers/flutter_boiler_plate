@@ -40,7 +40,7 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
 
       try {
         yield BoilerPlateFetching();
-        await boilerPlateRepository.getNotifierProvider(context);
+        await boilerPlateRepository.getNotifierProvider();
         yield BoilerPlateProvider();
       }
       on Exception {

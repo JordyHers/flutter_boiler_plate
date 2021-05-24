@@ -19,7 +19,7 @@ Future<void> pumpHomePage(WidgetTester tester) async {
     home: ChangeNotifierProvider(
       create: (_)=> UserClass(),
       child: BlocProvider(
-        create: (context) => BoilerPlateBloc(BoilerPlateRep(context),context),
+        create: (context) => BoilerPlateBloc(BoilerPlateRep(UserClass()),context),
         child: HomePage(),
       ),
     ),
