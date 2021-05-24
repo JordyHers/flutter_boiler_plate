@@ -9,9 +9,9 @@ import 'menu_page.dart';
 
 
 class TabBarItemPage extends StatefulWidget {
-  final BuildContext context;
 
-  const TabBarItemPage({Key key, this.context}) : super(key: key);
+
+  const TabBarItemPage({Key key}) : super(key: key);
 
   @override
   _TabBarItemPageState createState() => _TabBarItemPageState();

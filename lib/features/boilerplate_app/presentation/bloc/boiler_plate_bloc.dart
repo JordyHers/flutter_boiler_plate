@@ -11,9 +11,9 @@ part 'boiler_plate_state.dart';
 
 class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
   final BoilerPlateRepository boilerPlateRepository;
-  final BuildContext context;
 
-  BoilerPlateBloc(this.boilerPlateRepository,this.context) : super(BoilerPlateInitial());
+
+  BoilerPlateBloc(this.boilerPlateRepository) : super(BoilerPlateInitial());
 
   @override
   Stream<BoilerPlateState> mapEventToState(
@@ -39,8 +39,6 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
     } else if(event is GetProvider){
 
       try {
-        yield BoilerPlateFetching();
-        await boilerPlateRepository.getNotifierProvider();
         yield BoilerPlateProvider();
       }
       on Exception {
@@ -48,7 +46,6 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
 
       }
     }
-
 
     else {
       yield BoilerPlateError("Couldn't fetch user list. Is the device online?");

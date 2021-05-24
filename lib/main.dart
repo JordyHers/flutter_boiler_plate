@@ -8,7 +8,6 @@ import 'features/boilerplate_app/presentation/pages/tab_bar_items_page.dart';
 
 
 void main() {
-  Provider.debugCheckInvalidValueType = null;
   runApp(MyApp());
 }
 
@@ -23,8 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       home: Provider<UserClass>(
         create: (_) => UserClass(),
-        builder: (context,user) => BlocProvider(
-          create: (_) => BoilerPlateBloc(BoilerPlateRep(UserClass()), context),
+        builder: (context,__) => BlocProvider(
+          create: (_) => BoilerPlateBloc(BoilerPlateRep()),
           child: TabBarItemPage(),
         ),
       ),

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
-
+  UserClass _userClass= UserClass();
   ///Methods To send to Bloc => Local User
   void sendLocalToBloC(BuildContext context) {
     var boilerPlateBloc = context.read<BoilerPlateBloc>();
@@ -135,18 +135,16 @@ class HomePage extends StatelessWidget {
   }
 
   Widget buildProviderView(BuildContext context){
-    final userList = Provider.of<UserClass>(context,listen: false);
     return Center(
-          child: Consumer<UserClass>(
-              child: ListView.builder(
-                itemCount: userList.userList.length,
+          child: ListView.builder(
+                itemCount: _userClass.userList.length,
                 itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(userList.userList[index].name),
+                      title: Text(_userClass.userList[index].name),
                     );
                   }
 
-              )));
+              ));
   }
 
   Widget buildLoading() {
