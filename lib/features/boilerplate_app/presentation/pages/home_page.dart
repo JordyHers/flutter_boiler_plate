@@ -29,6 +29,13 @@ class HomePage extends StatelessWidget {
     Navigator.pop(context);
   }
 
+  ///Methods To send Provider to Bloc
+  void sendProviderToBloC(BuildContext context) {
+    var boilerPlateBloc = context.read<BoilerPlateBloc>();
+    boilerPlateBloc.add(GetProvider());
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,8 +115,8 @@ class HomePage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.compass_calibration_sharp),
               title: Text('Notifier Provider'),
-              //TODO: CREATE SENDPROVIDER AND YIELD TO REBUILD
-              //onTap: () async => await sendErrorToBloC(context),
+
+              onTap: () async => await sendProviderToBloC(context),
             ),
           ],
         ));

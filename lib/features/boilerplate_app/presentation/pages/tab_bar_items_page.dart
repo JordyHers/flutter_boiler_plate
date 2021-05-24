@@ -9,6 +9,10 @@ import 'menu_page.dart';
 
 
 class TabBarItemPage extends StatefulWidget {
+  final BuildContext context;
+
+  const TabBarItemPage({Key key, this.context}) : super(key: key);
+
   @override
   _TabBarItemPageState createState() => _TabBarItemPageState();
 }
@@ -47,18 +51,19 @@ class _TabBarItemPageState extends State<TabBarItemPage> {
   Widget build(BuildContext context) {
     /// WillpopScope allow us to control the back button and hinders the users to exit the app when he
     /// just wants to get to the previous page
-    return ChangeNotifierProvider<UserClass>(
-      create:(context) => UserClass(),
+    return ChangeNotifierProvider(
+      create: (_)=> UserClass(),
       child: WillPopScope(
-        onWillPop: () async =>
-        !await navigatorKeys[_currentTab].currentState.maybePop(),
-        child: CupertinoHomeScaffold(
-          currentTab: _currentTab,
-          onSelectTab: _selectTab,
-          widgetBuilders: widgetBuilders,
-          navigatorKeys: navigatorKeys,
-        ),
+          onWillPop: () async =>
+          !await navigatorKeys[_currentTab].currentState.maybePop(),
+          child: CupertinoHomeScaffold(
+            currentTab: _currentTab,
+            onSelectTab: _selectTab,
+            widgetBuilders: widgetBuilders,
+            navigatorKeys: navigatorKeys,
+          ),
       ),
     );
+
   }
 }

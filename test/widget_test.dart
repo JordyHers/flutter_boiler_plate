@@ -5,20 +5,23 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:boilerplate/features/boilerplate_app/domain/entities/model_provider.dart';
 import 'package:boilerplate/features/boilerplate_app/domain/repositories/boiler_plate_repository.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/bloc/boiler_plate_bloc.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/pages/home_page.dart';
-import 'package:boilerplate/features/boilerplate_app/presentation/pages/tab_bar_items_page.dart';
-import 'package:boilerplate/features/boilerplate_app/presentation/widgets/cupertino_home_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 
 Future<void> pumpHomePage(WidgetTester tester) async {
   await tester.pumpWidget(MaterialApp(
-    home: BlocProvider(
-      create: (context) => BoilerPlateBloc(BoilerPlateRep()),
-      child: HomePage(),
+    home: ChangeNotifierProvider(
+      create: (_)=> UserClass(),
+      child: BlocProvider(
+        create: (context) => BoilerPlateBloc(BoilerPlateRep(),context),
+        child: HomePage(),
+      ),
     ),
   ));
 
