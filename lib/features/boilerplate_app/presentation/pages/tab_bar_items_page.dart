@@ -1,6 +1,6 @@
-import 'package:boilerplate/features/boilerplate_app/domain/entities/model_provider.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/widgets/cupertino_home_scaffold.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/widgets/tab_item.dart';
+import 'package:boilerplate/features/boilerplate_app/presentation/bloc/boiler_plate_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'account_page.dart';
@@ -28,7 +28,7 @@ class _TabBarItemPageState extends State<TabBarItemPage> {
 
   Map<TabItem, WidgetBuilder> get widgetBuilders {
     return {
-      TabItem.homePage: (_) => HomePage(),
+      TabItem.homePage: (_) => ChangeNotifierProvider(create : (_) => BoilerPlateProvider(),child: HomePage()),
       TabItem.account: (context) => AccountPage(),
       TabItem.menu: (_) => MenuPage(),
     };
@@ -51,9 +51,7 @@ class _TabBarItemPageState extends State<TabBarItemPage> {
   Widget build(BuildContext context) {
     /// WillpopScope allow us to control the back button and hinders the users to exit the app when he
     /// just wants to get to the previous page
-    return ChangeNotifierProvider(
-      create: (_)=> UserClass(),
-      child: WillPopScope(
+    return  WillPopScope(
           onWillPop: () async =>
           !await navigatorKeys[_currentTab].currentState.maybePop(),
           child: CupertinoHomeScaffold(
@@ -62,7 +60,6 @@ class _TabBarItemPageState extends State<TabBarItemPage> {
             widgetBuilders: widgetBuilders,
             navigatorKeys: navigatorKeys,
           ),
-      ),
     );
 
   }

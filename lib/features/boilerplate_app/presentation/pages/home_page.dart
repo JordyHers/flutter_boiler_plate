@@ -31,6 +31,11 @@ class HomePage extends StatelessWidget {
 
   ///Methods To send Provider to Bloc
   void sendProviderToBloC(BuildContext context) {
+    final user = Provider.of<BoilerPlateProvider>(context,listen: false);
+    var order = user.userList.length +1;
+    var newUser = UserClass(name :'User $order', email:'User$order@Provider.com', age:21);
+    user.addNewUsers(newUser);
+
     var boilerPlateBloc = context.read<BoilerPlateBloc>();
     boilerPlateBloc.add(GetProvider());
     Navigator.pop(context);
@@ -135,16 +140,20 @@ class HomePage extends StatelessWidget {
   }
 
   Widget buildProviderView(BuildContext context){
-    return Center(
-          child: ListView.builder(
-                itemCount: _userClass.userList.length,
-                itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(_userClass.userList[index].name),
-                    );
-                  }
+    return Consumer<BoilerPlateProvider>(
+      builder: (context,user,child) => Center(
+            child: ListView.builder(
+                  itemCount: user.userList.length,
+                  itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(user.userList[index].name),
+                        subtitle: Text(user.userList[index].email),
+                        leading: Icon(Icons.person),
+                      );
+                    }
 
-              ));
+                )),
+    );
   }
 
   Widget buildLoading() {

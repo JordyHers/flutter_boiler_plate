@@ -7,7 +7,20 @@ class BoilerPlateInitial extends BoilerPlateState {}
 
 class BoilerPlateFetching extends BoilerPlateState{}
 
-class BoilerPlateProvider extends BoilerPlateState{}
+class BoilerPlateProvider extends BoilerPlateState with ChangeNotifier{
+  List<UserClass> _userClassList = [
+    UserClass(name :'User 1', email:'From provider', age:21),
+  ];
+
+  List<UserClass> get userList => _userClassList;
+
+
+  Future <void> addNewUsers (UserClass user)async {
+    _userClassList.add(user);
+    notifyListeners();
+    return _userClassList;
+  }
+}
 
 class BoilerPlateCompleted extends BoilerPlateState{
   final List<User> users;

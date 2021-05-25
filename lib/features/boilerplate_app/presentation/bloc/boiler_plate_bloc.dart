@@ -40,6 +40,7 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
 
       try {
         yield BoilerPlateProvider();
+
       }
       on Exception {
         yield BoilerPlateError("Couldn't fetch user list. Is the device online?");
