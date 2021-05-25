@@ -33,7 +33,8 @@ class HomePage extends StatelessWidget {
   void _delete(BoilerPlateProvider user,BuildContext context) {
     if(user.userList.length != 0){
       user.userList.removeLast();
-    } else{
+      print('the length of the list is : ${user.userList.length}');
+    } else if (user.userList.length == 0){
       var boilerPlateBloc = context.read<BoilerPlateBloc>();
       boilerPlateBloc.add(GetInitialInput());
     }
@@ -158,8 +159,9 @@ class HomePage extends StatelessWidget {
             child: ListView.builder(
                   itemCount: user.userList.length,
                   itemBuilder: (context, index) {
+                    //TODO: DISMISS THE DISMISSABLE
                       return Dismissible(
-                        key: Key('${user.userList[index].name}'),
+                        key: UniqueKey(),
                         onDismissed: (_)=> _delete(user,context),
                         child: ListTile(
                           title: Text(user.userList[index].name),
