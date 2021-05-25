@@ -47,6 +47,17 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
 
       }
     }
+    else if(event is GetInitialInput){
+
+      try {
+        yield BoilerPlateInitial();
+
+      }
+      on Exception {
+        yield BoilerPlateError("Couldn't fetch user list. Is the device online?");
+
+      }
+    }
 
     else {
       yield BoilerPlateError("Couldn't fetch user list. Is the device online?");

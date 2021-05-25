@@ -29,6 +29,19 @@ class HomePage extends StatelessWidget {
     Navigator.pop(context);
   }
 
+  ///Methods To send ERROR to Bloc
+  void _delete(BoilerPlateProvider user,BuildContext context) {
+    if(user.userList.length != 0){
+      user.userList.removeLast();
+    } else{
+      var boilerPlateBloc = context.read<BoilerPlateBloc>();
+      boilerPlateBloc.add(GetInitialInput());
+    }
+
+
+
+  }
+
   ///Methods To send Provider to Bloc
   void sendProviderToBloC(BuildContext context) {
     final user = Provider.of<BoilerPlateProvider>(context,listen: false);
@@ -145,10 +158,14 @@ class HomePage extends StatelessWidget {
             child: ListView.builder(
                   itemCount: user.userList.length,
                   itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(user.userList[index].name),
-                        subtitle: Text(user.userList[index].email),
-                        leading: Icon(Icons.person),
+                      return Dismissible(
+                        key: Key('${user.userList[index].name}'),
+                        onDismissed: (_)=> _delete(user,context),
+                        child: ListTile(
+                          title: Text(user.userList[index].name),
+                          subtitle: Text(user.userList[index].email),
+                          leading: Icon(Icons.person),
+                        ),
                       );
                     }
 

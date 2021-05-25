@@ -12,3 +12,5 @@ class GetRemoteUsers extends BoilerPlateEvent{}
 class GetError extends BoilerPlateEvent{}
 
 class GetProvider extends BoilerPlateEvent{}
+
+class GetInitialInput extends BoilerPlateEvent{}
