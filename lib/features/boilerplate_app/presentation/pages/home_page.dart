@@ -161,6 +161,8 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     //TODO: DISMISS THE DISMISSABLE
                       return Dismissible(
+                        background: Container(color: Colors.red,),
+                        direction: DismissDirection.endToStart,
                         key: UniqueKey(),
                         onDismissed: (_)=> _delete(user,context),
                         child: ListTile(

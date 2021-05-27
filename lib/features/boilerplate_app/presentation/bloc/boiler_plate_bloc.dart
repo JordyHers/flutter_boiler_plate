@@ -4,7 +4,6 @@ import 'package:boilerplate/features/boilerplate_app/data/models/user_model.dart
 import 'package:boilerplate/features/boilerplate_app/domain/repositories/boiler_plate_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
-import 'package:provider/provider.dart';
 import 'package:boilerplate/features/boilerplate_app/domain/entities/model_provider.dart';
 part 'boiler_plate_event.dart';
 part 'boiler_plate_state.dart';
