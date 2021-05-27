@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  ///Methods To send ERROR to Bloc
+  ///Methods To delete Provider ListTile
   void _delete(BoilerPlateProvider user,BuildContext context) {
     if(user.userList.length != 0){
       user.userList.removeLast();
@@ -39,8 +39,6 @@ class HomePage extends StatelessWidget {
       boilerPlateBloc.add(GetInitialInput());
     }
 
-
-
   }
 
   ///Methods To send Provider to Bloc
@@ -49,7 +47,6 @@ class HomePage extends StatelessWidget {
     var order = user.userList.length +1;
     var newUser = UserClass(name :'User $order', email:'User$order@Provider.com', age:21);
     user.addNewUsers(newUser);
-
     var boilerPlateBloc = context.read<BoilerPlateBloc>();
     boilerPlateBloc.add(GetProvider());
     Navigator.pop(context);
@@ -113,7 +110,7 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text('Get Local Users'),
               leading: Icon(Icons.local_fire_department_sharp),
-              onTap: () async => await sendLocalToBloC(context),
+              onTap: () async => sendLocalToBloC(context),
             ),
             SizedBox(
               height: 10,
@@ -121,7 +118,7 @@ class HomePage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.computer),
               title: Text('Get RemoteUsers'),
-              onTap: () async => await sendRemoteToBloC(context),
+              onTap: () async =>  sendRemoteToBloC(context),
             ),
             SizedBox(
               height: 10,
@@ -129,7 +126,7 @@ class HomePage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.error_outline),
               title: Text('Send Error'),
-              onTap: () async => await sendErrorToBloC(context),
+              onTap: () async =>  sendErrorToBloC(context),
             ), SizedBox(
               height: 10,
             ),
@@ -137,7 +134,7 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.compass_calibration_sharp),
               title: Text('Notifier Provider'),
 
-              onTap: () async => await sendProviderToBloC(context),
+              onTap: () async =>  sendProviderToBloC(context),
             ),
           ],
         ));
@@ -159,7 +156,7 @@ class HomePage extends StatelessWidget {
             child: ListView.builder(
                   itemCount: user.userList.length,
                   itemBuilder: (context, index) {
-                    //TODO: DISMISS THE DISMISSABLE
+                    //TODO: DISMISS THE DISMISSIBLE
                       return Dismissible(
                         background: Container(color: Colors.red,),
                         direction: DismissDirection.endToStart,
@@ -171,9 +168,7 @@ class HomePage extends StatelessWidget {
                           leading: Icon(Icons.person),
                         ),
                       );
-                    }
-
-                )),
+                    })),
     );
   }
 
