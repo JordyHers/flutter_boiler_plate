@@ -99,6 +99,7 @@ class HomePage extends StatelessWidget {
           children: [
             DrawerHeader(
               child: Container(
+                key: Key('Container_Key'),
                 color: Colors.indigo,
                 height: 130,
                 width: double.maxFinite,
