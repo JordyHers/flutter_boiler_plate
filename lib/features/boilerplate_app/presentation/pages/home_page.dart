@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
-  UserClass _userClass= UserClass();
+  
   ///Methods To send to Bloc => Local User
   void sendLocalToBloC(BuildContext context) {
     var boilerPlateBloc = context.read<BoilerPlateBloc>();
