@@ -1,6 +1,9 @@
+import 'package:boilerplate/features/boilerplate_app/data/models/album_model.dart';
+import 'package:boilerplate/features/boilerplate_app/data/models/photo_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:boilerplate/features/boilerplate_app/data/models/user_model.dart';
 import 'dart:convert';
+import 'package:boilerplate/core/utils/strings.dart' as strings;
 import 'package:flutter/services.dart' show rootBundle;
 
 abstract class BoilerJsonSource {
@@ -36,5 +39,36 @@ class BoilerJsonDataSource implements BoilerJsonSource{
       users.add(user);
     }
     return users;
+  }
+
+  ///This function returns The list of Albums from The Api
+  @override
+  Future<List<Album>> getRemoteAlbumList () async {
+    var data = await http.get(strings.Strings.apiAlbums);
+    var jsonData = json.decode(data.body);
+    List<Album> albums =[];
+    print('****** GETTING REMOTE LIST OF USERS *******');
+    for(var al in jsonData){
+      Album album = Album( id: al["id"], title: al["title"]);
+      print(album);
+      albums.add(album);
+    }
+    return albums;
+  }
+
+
+  @override
+  Future<List<Photo>> getRemotePhotoList () async {
+    var data = await http.get(strings.Strings.apiPhotos);
+    var jsonData = json.decode(data.body);
+    List<Photo> photos =[];
+    print('****** GETTING REMOTE LIST OF USERS *******');
+    for(var ph in jsonData){
+      Photo photo = Photo(id: ph["id"], title: ph["title"], url: ph["url"], thumbnailUrl:ph["thumbnailUrl"]);
+      print(photo);
+
+      photos.add(photo);
+    }
+    return photos;
   }
 }

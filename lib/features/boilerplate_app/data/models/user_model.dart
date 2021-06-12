@@ -14,8 +14,4 @@ class User extends ChangeNotifier implements UserModel{
    User(this.id,this.name,this.username,this.email);
 
 
-  @override
-  String toString() {
-    return 'id : $id , name : $name , email: $email, username: $username';
-  }
 }

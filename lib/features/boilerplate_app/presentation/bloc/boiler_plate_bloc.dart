@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:boilerplate/features/boilerplate_app/data/models/album_model.dart';
+import 'package:boilerplate/features/boilerplate_app/data/models/photo_model.dart';
 import 'package:boilerplate/features/boilerplate_app/data/models/user_model.dart';
 import 'package:boilerplate/features/boilerplate_app/domain/repositories/boiler_plate_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,39 +24,35 @@ class BoilerPlateBloc extends Bloc<BoilerPlateEvent, BoilerPlateState> {
       try {
         yield BoilerPlateFetching();
         final users = await boilerPlateRepository.getLocalList('1234');
-        yield BoilerPlateCompleted(users);
+      //  yield BoilerPlateCompleted(users);
       } on Exception {
         yield BoilerPlateError("Couldn't fetch user list. Is the device online?");
       }
     }
-    else if (event is GetRemoteUsers){
+    else if (event is GetRemoteAlbums){
       try {
         yield BoilerPlateFetching();
-        final users = await boilerPlateRepository.getRemoteList('1234');
-        yield BoilerPlateCompleted(users);
+        final albums = await boilerPlateRepository.getRemoteAlbums();
+        yield BoilerPlateCompletedAlbum(albums);
       } on Exception {
         yield BoilerPlateError("Couldn't fetch user list. Is the device online?");
       }
-    } else if(event is GetProvider){
-
+    }  else if (event is GetRemotePhotos){
       try {
-        yield BoilerPlateProvider();
-
-      }
-      on Exception {
+        yield BoilerPlateFetching();
+        final photos = await boilerPlateRepository.getRemotePhotos();
+        yield BoilerPlateCompletedPhotos(photos);
+      } on Exception {
         yield BoilerPlateError("Couldn't fetch user list. Is the device online?");
-
       }
     }
     else if(event is GetInitialInput){
-
       try {
-        yield BoilerPlateInitial();
-
-      }
-      on Exception {
+        yield BoilerPlateFetching();
+        final albums = await boilerPlateRepository.getRemoteAlbums();
+        yield BoilerPlateCompletedAlbum(albums);
+      } on Exception {
         yield BoilerPlateError("Couldn't fetch user list. Is the device online?");
-
       }
     }
 
