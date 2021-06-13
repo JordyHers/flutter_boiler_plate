@@ -167,7 +167,7 @@ class AlbumsPage extends StatelessWidget {
 
   Widget buildLoading() {
     return Center(
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo),),
     );
   }
 
