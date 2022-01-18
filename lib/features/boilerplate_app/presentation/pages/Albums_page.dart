@@ -1,6 +1,5 @@
 import 'package:boilerplate/features/boilerplate_app/data/models/album_model.dart';
 import 'package:boilerplate/features/boilerplate_app/data/models/photo_model.dart';
-import 'package:boilerplate/features/boilerplate_app/data/models/user_model.dart';
 import 'package:boilerplate/features/boilerplate_app/domain/entities/model_provider.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/bloc/boiler_plate_bloc.dart';
 import 'package:boilerplate/features/boilerplate_app/presentation/widgets/cardsTile.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class AlbumsPage extends StatelessWidget {
-  AlbumsPage({Key key}) : super(key: key);
+  AlbumsPage({Key? key}) : super(key: key);
 
   ///Methods To send to Bloc => Local User
   void sendLocalToBloC(BuildContext context) {
@@ -32,13 +31,12 @@ class AlbumsPage extends StatelessWidget {
     Navigator.pop(context);
   }
 
-
-
   ///Methods To send Provider to Bloc
   void sendProviderToBloC(BuildContext context) {
-    final user = Provider.of<BoilerPlateProvider>(context,listen: false);
-    var order = user.userList.length +1;
-    var newUser = UserClass(name :'User $order', email:'User$order@Provider.com', age:21);
+    final user = Provider.of<BoilerPlateProvider>(context, listen: false);
+    var order = user.userList.length + 1;
+    var newUser = UserClass(
+        name: 'User $order', email: 'User$order@Provider.com', age: 21);
     user.addNewUsers(newUser);
     var boilerPlateBloc = context.read<BoilerPlateBloc>();
     boilerPlateBloc.add(GetProvider());
@@ -74,7 +72,7 @@ class AlbumsPage extends StatelessWidget {
                   return buildLoading();
                 } else if (state is BoilerPlateCompletedAlbum) {
                   return buildListViewData(state.albums);
-                }else if (state is BoilerPlateCompletedPhotos) {
+                } else if (state is BoilerPlateCompletedPhotos) {
                   return buildListViewPhotos(state.photos);
                 } else {
                   return buildInitialInput(context);
@@ -112,7 +110,7 @@ class AlbumsPage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.computer),
               title: Text('Get Albums'),
-              onTap: () async =>  sendRemoteToBloCAlbum(context),
+              onTap: () async => sendRemoteToBloCAlbum(context),
             ),
             SizedBox(
               height: 10,
@@ -120,44 +118,44 @@ class AlbumsPage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.computer),
               title: Text('Get Photos'),
-              onTap: () async =>  sendRemoteToBloCPhotos(context),
+              onTap: () async => sendRemoteToBloCPhotos(context),
             ),
-
             ListTile(
               leading: Icon(Icons.compass_calibration_sharp),
               title: Text('Notifier Provider'),
-
-              onTap: () async =>  sendProviderToBloC(context),
+              onTap: () async => sendProviderToBloC(context),
             ),
           ],
         ));
   }
 
   Widget buildInitialInput(BuildContext context) {
-    return Center(child: Text('Home Page',
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-          color: Colors.indigo,
-        )));
-
+    return Center(
+        child: Text('Home Page',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.indigo,
+            )));
   }
 
-  Widget buildProviderView(BuildContext context){
+  Widget buildProviderView(BuildContext context) {
     return Consumer<BoilerPlateProvider>(
-      builder: (context,user,child) => Center(
+      builder: (context, user, child) => Center(
           child: ListView.builder(
               itemCount: user.userList.length,
               itemBuilder: (context, index) {
                 //TODO: DISMISS THE DISMISSIBLE
                 return Dismissible(
-                  background: Container(color: Colors.red,),
+                  background: Container(
+                    color: Colors.red,
+                  ),
                   direction: DismissDirection.endToStart,
                   key: UniqueKey(),
-                //  onDismissed: (_)=> _delete(user,context),
+                  //  onDismissed: (_)=> _delete(user,context),
                   child: ListTile(
-                    title: Text(user.userList[index].name),
-                    subtitle: Text(user.userList[index].email),
+                    title: Text(user.userList[index].name as String),
+                    subtitle: Text(user.userList[index].email as String),
                     leading: Icon(Icons.person),
                   ),
                 );
@@ -167,7 +165,9 @@ class AlbumsPage extends StatelessWidget {
 
   Widget buildLoading() {
     return Center(
-      child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo),),
+      child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo),
+      ),
     );
   }
 
@@ -197,7 +197,7 @@ class AlbumsPage extends StatelessWidget {
               users[index].title,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
             ),
-            trailing:  Tiles(photo: users[index]),
+            trailing: Tiles(photo: users[index]),
             leading: Text(
               users[index].id.toString(),
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 23),

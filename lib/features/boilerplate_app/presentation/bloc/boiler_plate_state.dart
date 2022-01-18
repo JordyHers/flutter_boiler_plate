@@ -5,7 +5,7 @@ abstract class BoilerPlateState {}
 
 class BoilerPlateInitial extends BoilerPlateState {
   final List<Album> albums;
-  BoilerPlateInitial({this.albums});
+  BoilerPlateInitial({required this.albums});
 
   @override
   bool operator ==(Object o) {
@@ -18,29 +18,25 @@ class BoilerPlateInitial extends BoilerPlateState {
   int get hashCode => albums.hashCode;
 }
 
-class BoilerPlateFetching extends BoilerPlateState{}
+class BoilerPlateFetching extends BoilerPlateState {}
 
-class BoilerPlateProvider extends BoilerPlateState with ChangeNotifier{
+class BoilerPlateProvider extends BoilerPlateState with ChangeNotifier {
   List<UserClass> _userClassList = [
-    UserClass(name :'User 1', email:'From provider', age:21),
+    UserClass(name: 'User 1', email: 'From provider', age: 21),
   ];
 
   List<UserClass> get userList => _userClassList;
 
-
-  Future <void> addNewUsers (UserClass user)async {
+  Future<List<UserClass>?> addNewUsers(UserClass user) async {
     _userClassList.add(user);
     notifyListeners();
     return _userClassList;
   }
 }
 
-
-
-class BoilerPlateCompletedPhotos extends BoilerPlateState{
-
+class BoilerPlateCompletedPhotos extends BoilerPlateState {
   final List<Photo> photos;
-    BoilerPlateCompletedPhotos(this.photos);
+  BoilerPlateCompletedPhotos(this.photos);
 
   @override
   bool operator ==(Object o) {
@@ -52,10 +48,10 @@ class BoilerPlateCompletedPhotos extends BoilerPlateState{
   @override
   int get hashCode => photos.hashCode;
 }
-class BoilerPlateCompletedAlbum extends BoilerPlateState{
 
+class BoilerPlateCompletedAlbum extends BoilerPlateState {
   final List<Album> albums;
-    BoilerPlateCompletedAlbum(this.albums);
+  BoilerPlateCompletedAlbum(this.albums);
 
   @override
   bool operator ==(Object o) {
@@ -68,13 +64,9 @@ class BoilerPlateCompletedAlbum extends BoilerPlateState{
   int get hashCode => albums.hashCode;
 }
 
-
-
-
-
-class BoilerPlateError extends BoilerPlateState{
+class BoilerPlateError extends BoilerPlateState {
   final String message;
-   BoilerPlateError(this.message);
+  BoilerPlateError(this.message);
 
   @override
   bool operator ==(Object o) {
@@ -86,5 +78,3 @@ class BoilerPlateError extends BoilerPlateState{
   @override
   int get hashCode => message.hashCode;
 }
-
-
